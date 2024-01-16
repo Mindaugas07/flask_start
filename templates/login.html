@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
+
 <form action="#" method="post">
+
     <p>Vardas:</p>
-    <p><input type="text" name="vardas" /></p>
+    <p><input type="text" name="name" /></p>
+    <p>El. paštas:</p>
+    <p><input type="text" name="email" /></p>
+    <p>Žinutė:</p>
+    <p><input type="text" name="message" /></p>
     <p><input type="submit" value="submit" /></p>
 </form>
+{% if email_taken %}
+<h5>E-mail is already taken. Please use another one!</h5>
+{% endif %}
 {% endblock %}

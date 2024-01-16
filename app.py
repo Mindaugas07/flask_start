@@ -8,12 +8,16 @@ def login():
         name = request.form["name"]
         email = request.form["email"]
         message = request.form["message"]
-        query = Message(name, email, message)
+        if Message.query.filter_by(email=email).first() is None:
+            query = Message(name, email, message)
+        else:
+            print("Email already exists. Please use another email.")
+            return render_template("login.html", email_taken=True)
         db.session.add(query)
         db.session.commit()
         return render_template("greetings.html", vardas=name)
     elif request.method == "GET":
-        return render_template("login.html")
+        return render_template("login.html", email_taken=False)
 
 
 @app.route(
